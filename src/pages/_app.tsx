@@ -6,9 +6,9 @@ import { useStoresContextState } from '@/common/hooks/use-stores-context-state';
 import 'react-toastify/dist/ReactToastify.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { state, dispatch } = useStoresContextState();
+  const { state, dispatch, notify, sendRequest } = useStoresContextState();
   return (
-    <StoresContext.Provider value={{ stores: state?.stores, dispatch }}>
+    <StoresContext.Provider value={{ stores: state?.stores, dispatch, notify, sendRequest }}>
       <Component {...pageProps} />
       <ToastContainer
         position="bottom-center"

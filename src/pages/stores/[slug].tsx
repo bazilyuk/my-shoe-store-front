@@ -3,7 +3,7 @@ import type { NextPage, NextPageContext } from 'next';
 import { StorePageComponent } from '@/components/pages/store';
 
 const StorePage: NextPage<{ slug: string }> = ({ slug }) => {
-  return <StorePageComponent name={slug} />;
+  return <StorePageComponent storeName={slug} />;
 };
 
 export const getServerSideProps = async (ctx: NextPageContext) => {

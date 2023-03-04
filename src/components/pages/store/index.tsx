@@ -1,60 +1,27 @@
-import React, { FC, useContext } from 'react';
+import React, { FC } from 'react';
 import Link from 'next/link';
 import { StorePageProps } from '@/components/pages/store/types';
-import { StoresContext } from '@/common/context/stores-context';
-import Table from '@mui/material/Table';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import TableCell from '@mui/material/TableCell';
-import TableBody from '@mui/material/TableBody';
 import { Typography, Breadcrumbs } from '@mui/material';
-import { HIGH_LIMIT, LOW_LIMIT } from '@/common/const/store';
+import { StoreModelsTable } from '@/components/pages/store/components/models-table';
+import { ActionInventoryModal } from '@/components/pages/store/components/action-inventory-modal';
+import { ActionInventoryModalContext } from '@/components/pages/store/context/action-inventory-modal-context';
+import { UseActionInventoryModalState } from '@/components/pages/store/hooks/use-action-inventory-modal-state';
 
-export const StorePageComponent: FC<StorePageProps> = ({ name }) => {
-  const { stores } = useContext(StoresContext);
-
-  const store = stores.find((store) => store.name === name);
-
+export const StorePageComponent: FC<StorePageProps> = ({ storeName }) => {
+  const { isOpen, setIsOpen, actionType, setActionType, model, setModel } = UseActionInventoryModalState();
   return (
-    <div>
+    <ActionInventoryModalContext.Provider value={{ isOpen, setIsOpen, actionType, setActionType, model, setModel }}>
       <Breadcrumbs aria-label="breadcrumb">
         <Link href="/" passHref>
           Stores
         </Link>
-        <Typography color="text.primary">{name}</Typography>
+        <Typography color="text.primary">{storeName}</Typography>
       </Breadcrumbs>
       <Typography my={5} variant="h3" component="h2" align="center">
-        {name}
+        {storeName}
       </Typography>
-      <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>№</TableCell>
-            <TableCell>Model</TableCell>
-            <TableCell>Inventory</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {store?.models?.map(({ name, inventory }, index) => {
-            const needMore = inventory < LOW_LIMIT;
-            const over = inventory > HIGH_LIMIT;
-            const color = needMore || over ? 'red' : 'grey';
-            return (
-              <TableRow key={`store-${name}`} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                <TableCell component="th" scope="row">
-                  {index}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {name}
-                </TableCell>
-                <TableCell component="th" scope="row" sx={{ color }}>
-                  {inventory}
-                </TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </div>
+      <StoreModelsTable storeName={storeName} />
+      {isOpen ? <ActionInventoryModal shopName={storeName} /> : null}
+    </ActionInventoryModalContext.Provider>
   );
 };
