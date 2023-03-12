@@ -1,5 +1,4 @@
 import React, { RefObject } from 'react';
-import { Omit } from '@/common/utils/types/omit';
 
 type HTMLPropsReact<T> = Omit<React.HTMLProps<T>, 'ref' | 'as' | 'color'>;
 

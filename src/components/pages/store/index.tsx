@@ -5,10 +5,10 @@ import { Typography, Breadcrumbs } from '@mui/material';
 import { StoreModelsTable } from '@/components/pages/store/components/models-table';
 import { ActionInventoryModal } from '@/components/pages/store/components/action-inventory-modal';
 import { ActionInventoryModalContext } from '@/components/pages/store/context/action-inventory-modal-context';
-import { UseActionInventoryModalState } from '@/components/pages/store/hooks/use-action-inventory-modal-state';
+import { useActionInventoryModalState } from '@/components/pages/store/hooks/use-action-inventory-modal-state';
 
 export const StorePageComponent: FC<StorePageProps> = ({ storeName }) => {
-  const { isOpen, setIsOpen, actionType, setActionType, model, setModel } = UseActionInventoryModalState();
+  const { isOpen, setIsOpen, actionType, setActionType, model, setModel } = useActionInventoryModalState();
   return (
     <ActionInventoryModalContext.Provider value={{ isOpen, setIsOpen, actionType, setActionType, model, setModel }}>
       <Breadcrumbs aria-label="breadcrumb">

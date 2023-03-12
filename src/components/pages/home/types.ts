@@ -4,7 +4,7 @@ export interface StoresRowItemProps extends storeType {
   index: number;
 }
 
-export type UseStoresRowItemProps = {
+export type StoreChipsProps = {
   storeName: string;
   models: modelType[];
 };

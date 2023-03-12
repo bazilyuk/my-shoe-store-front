@@ -1,5 +1,5 @@
 import { TextProps } from 'react-uforms';
-import { ArrayToType } from '@/common/const/types';
+import { ArrayToType } from '@/common/utils/types/types';
 import { HtmlProps } from '@/common/utils/types/html-props';
 
 export const FormInputTypeArray = ['date', 'text', 'password', 'email', 'tel', 'number', 'hidden'] as const;

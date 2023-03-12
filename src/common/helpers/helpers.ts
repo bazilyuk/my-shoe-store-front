@@ -1,4 +1,4 @@
-import { SHOES_MODELS, STORE_STORES } from '@/common/const/store';
+import { SHOES_MODELS, STORE_STORES } from '@/common/const/stores';
 import uuid from 'react-uuid';
 
 export const generateDefaultStores = () => {

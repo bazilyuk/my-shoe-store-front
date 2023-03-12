@@ -1,27 +1,54 @@
 import { StoreContextType } from '@/common/context/types';
-import { CHANGE_INVENTORY } from '@/common/context/const';
+import { CHANGE_INVENTORY, DECREASE_INVENTORY, INCREASE_INVENTORY } from '@/common/context/const';
+import { notify } from '@/common/hooks';
 
 const storesReducer = (state: StoreContextType, action: any): StoreContextType => {
-  if (action.type === CHANGE_INVENTORY) {
-    const newStores = JSON.parse(JSON.stringify(state.stores));
-    const storeIndex = newStores.findIndex(({ name }) => name === action.store);
+  const newStores = JSON.parse(JSON.stringify(state.stores));
+  const isChangeInventory = action.type === CHANGE_INVENTORY;
+  const isIncreaseInventory = action.type === INCREASE_INVENTORY;
+  const isDecreaseInventory = action.type === DECREASE_INVENTORY;
 
-    if (storeIndex !== -1) {
-      const modelIndex = newStores[storeIndex].models.findIndex(({ name }) => name === action.model);
+  switch (true) {
+    case isChangeInventory:
+    case isIncreaseInventory:
+    case isDecreaseInventory:
+      const storeIndex = newStores?.findIndex(({ name }) => name === action.store);
 
-      if (modelIndex !== -1) {
-        newStores[storeIndex].models[modelIndex].inventory = action.inventory;
+      if (storeIndex !== -1) {
+        const modelIndex = newStores[storeIndex].models.findIndex(({ name }) => name === action.model);
 
-        return {
-          ...state,
-          stores: [...newStores],
-        };
+        if (modelIndex !== -1) {
+          const getNewInventory = () => {
+            const slot = newStores[storeIndex].models[modelIndex].inventory;
+            const amount = +action.inventory;
+
+            switch (true) {
+              case isChangeInventory:
+                return amount;
+              case isIncreaseInventory:
+              case isDecreaseInventory:
+                return isDecreaseInventory ? slot - amount : slot + amount;
+              default:
+                return slot;
+            }
+          };
+
+          const inventory = getNewInventory();
+
+          newStores[storeIndex].models[modelIndex].inventory = inventory;
+          notify({ store: action.store, model: action.model, inventory: inventory });
+
+          return {
+            ...state,
+            stores: [...newStores],
+          };
+        }
       }
-    }
+
+      return state;
+    default:
+      return state;
   }
-
-  return state;
-
   // throw Error('Unknown action.');
 };
 

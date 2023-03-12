@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import { ModelsRowItemProps } from '@/components/pages/store/types';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import { UseStoreModelsRowItem } from '@/components/pages/store/hooks/use-store-models-row-item';
+import { useStoreModelsRowItem } from '@/components/pages/store/hooks/use-store-models-row-item';
 
 export const StoreModelsRowItem: FC<ModelsRowItemProps> = ({ name, inventory, index }) => {
-  const { color, ActionButton } = UseStoreModelsRowItem({ name, inventory });
+  const { color, ActionButton } = useStoreModelsRowItem({ name, inventory });
   return (
     <TableRow key={`store-${name}`} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
       <TableCell component="th" scope="row">

@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { ActionInventoryModalContext } from '@/components/pages/store/context/action-inventory-modal-context';
-import { HIGH_LIMIT, LOW_LIMIT } from '@/common/const/store';
+import { HIGH_LIMIT, LOW_LIMIT } from '@/common/const/stores';
 import { INVENTORY_ACTION_TYPE } from '@/components/pages/store/types';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import { modelType } from '@/common/context/types';
 
-export const UseStoreModelsRowItem = ({ name, inventory }: modelType) => {
+export const useStoreModelsRowItem = ({ name, inventory }: modelType) => {
   const { setIsOpen, setActionType, setModel } = useContext(ActionInventoryModalContext);
 
   const needMore = inventory < LOW_LIMIT;

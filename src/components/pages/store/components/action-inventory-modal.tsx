@@ -4,10 +4,10 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 import { InventoryModalProps } from '@/components/pages/store/types';
 import { FormSelectField } from '@/components/ui/form/select';
 import { FormInputField } from '@/components/ui/form/input';
-import { UseActionInventoryForm } from '@/components/pages/store/hooks/use-action-inventory-form';
+import { useActionInventoryForm } from '@/components/pages/store/hooks/use-action-inventory-form';
 
 export const ActionInventoryModal: FC<InventoryModalProps> = ({ shopName }) => {
-  const { onClose, options, type, validation, defaultValues, onSubmit, shoesModel } = UseActionInventoryForm(shopName);
+  const { onClose, options, type, validation, defaultValues, onSubmit, shoesModel } = useActionInventoryForm(shopName);
   return (
     <Dialog open={true} onClose={onClose} maxWidth="md">
       <Form onSubmit={onSubmit} defaultValues={defaultValues} validation={validation}>
