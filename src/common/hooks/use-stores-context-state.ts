@@ -2,7 +2,7 @@ import { useEffect, useReducer, useState } from 'react';
 import { defaultStoresContext } from '@/common/context/stores-context';
 import storesReducer from '@/common/context/stores-reducer';
 import { CHANGE_INVENTORY, DECREASE_INVENTORY, INCREASE_INVENTORY } from '@/common/context/const';
-import { notify } from '@/common/hooks/index';
+import { notify } from '@/common/helpers';
 import { SendRequestType } from '@/common/context/types';
 
 export const useStoresContextState = () => {

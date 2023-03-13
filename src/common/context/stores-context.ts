@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 import { StoreContextType } from './types';
-import { generateDefaultStores } from '@/common/helpers/helpers';
+import { generateDefaultStores } from '@/common/helpers';
 
 export const defaultStoresContext: StoreContextType = {
   stores: generateDefaultStores(),

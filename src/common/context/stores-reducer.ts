@@ -1,6 +1,6 @@
 import { StoreContextType } from '@/common/context/types';
 import { CHANGE_INVENTORY, DECREASE_INVENTORY, INCREASE_INVENTORY } from '@/common/context/const';
-import { notify } from '@/common/hooks';
+import { notify } from '@/common/helpers';
 
 const storesReducer = (state: StoreContextType, action: any): StoreContextType => {
   const newStores = JSON.parse(JSON.stringify(state.stores));
