@@ -2,10 +2,11 @@ import React, { FC } from 'react';
 import { ModelsRowItemProps } from '@/components/pages/store/types';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import { useStoreModelsRowItem } from '@/components/pages/store/hooks/use-store-models-row-item';
+import { StoreModelsActionButtons } from '@/components/pages/store/components/action-buttons';
+import { getInventoryColor } from '@/common/helpers';
 
 export const StoreModelsRowItem: FC<ModelsRowItemProps> = ({ name, inventory, index }) => {
-  const { color, ActionButton } = useStoreModelsRowItem({ name, inventory });
+  const color = getInventoryColor({ inventory });
   return (
     <TableRow key={`store-${name}`} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
       <TableCell component="th" scope="row">
@@ -18,7 +19,7 @@ export const StoreModelsRowItem: FC<ModelsRowItemProps> = ({ name, inventory, in
         {inventory}
       </TableCell>
       <TableCell component="th" scope="row">
-        <ActionButton />
+        <StoreModelsActionButtons {...{ name, inventory }} />
       </TableCell>
     </TableRow>
   );

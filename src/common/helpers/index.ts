@@ -31,3 +31,10 @@ export const notify = ({ store, model, inventory }) => {
 
   return null;
 };
+
+export const getInventoryColor = ({ inventory }: { inventory: number }) => {
+  const needMore = inventory < LOW_LIMIT;
+  const over = inventory > HIGH_LIMIT;
+
+  return needMore || over ? 'red' : 'grey';
+};
